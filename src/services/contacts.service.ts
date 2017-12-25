@@ -5,8 +5,8 @@ import {Http} from '@angular/http';
 export class ContactsService{
   constructor(public http:Http){}
 
-  getContact(){
-    return this.http.get("http://127.0.0.1:8080/chercherContacts?mc=e1&size=6&page=1")
+  getContact(motCle:String,page:number,size:number){
+    return this.http.get("http://127.0.0.1:8080/chercherContacts?mc="+motCle+"&size="+size+"&page="+page)
       .map(resp=>resp.json())
   }
 }
