@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
-import * as http from 'http';
-import "rxjs/add/operator/map"
+
+
+import 'rxjs/add/operator/map';
 
 import {ContactsService} from '../../services/contacts.service';
-import Any = jasmine.Any;
+
+import {Http} from '@angular/http';
+
+
+
 
 @Component({
   selector: 'app-contacts',
@@ -12,8 +16,8 @@ import Any = jasmine.Any;
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
- pageContacts:Any;
- motCle:String="";
+ pageContacts:number;
+ motCle:String='';
  currentPage:number=0;
  size:number=5;
  pages:Array<number>;
@@ -26,11 +30,11 @@ export class ContactsComponent implements OnInit {
     this.contactsService.getContact(this.motCle,this.currentPage,this.size)
       .subscribe(data=>{
           this.pageContacts=data;
-          this.pages=Array<number>(data.totalPages)
+          this.pages=Array<number>(data.totalPages);
         },err=>{
           console.log(err);
         }
-      )
+      );
   }
   chercher(){
     this.doSearch();
