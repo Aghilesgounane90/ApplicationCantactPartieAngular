@@ -12,7 +12,13 @@
           <th>Id</th><th>Nom</th><th>Prenom</th><th>Email</th>
         </tr>
         <tr *ngFor="let c of pageContacts?.content">
-          <td>{{c.id}}</td><td>{{c.nom}}</td><td>{{c.prenom}}</td><td>{{c.email}}</td>
+          <td>{{c.id}}</td>
+          <td>{{c.nom}}</td>
+          <td>{{c.prenom}}</td>
+          <td>{{c.email}}</td>
+          <td>
+            <a (click)="onEditCantact(c.id)" class="clickable">Edit</a>
+          </td>
         </tr>
       </table>
       <div class="container">

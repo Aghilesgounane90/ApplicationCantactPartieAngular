@@ -3,7 +3,7 @@ export class Contact{
   nom:string;
   prenom:string;
   email:string;
-  datenaissance:Date;
+  dateNaisance:Date;
   tel:number;
   photo:string;
 }
