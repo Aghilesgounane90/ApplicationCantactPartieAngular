@@ -7,6 +7,7 @@ import {ContactsService} from '../../services/contacts.service';
 
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
+import {Contact} from '../model/model.contact';
 
 
 
@@ -17,7 +18,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
- pageContacts:number;
+ pageContacts:any;
  motCle:String='';
  currentPage:number=0;
  size:number=5;
@@ -25,7 +26,14 @@ export class ContactsComponent implements OnInit {
   constructor(private http:Http,public contactsService:ContactsService,public router:Router) { }
 
   ngOnInit() {
-
+    this.contactsService.getContacts(this.motCle,this.currentPage,this.size)
+      .subscribe(data=>{
+          this.pageContacts=data;
+          this.pages=Array<number>(data.totalPages);
+        },err=>{
+          console.log(err);
+        }
+      );
   }
   doSearch(){
     this.contactsService.getContacts(this.motCle,this.currentPage,this.size)
@@ -46,5 +54,19 @@ export class ContactsComponent implements OnInit {
   }
   onEditCantact(id:number){
   this.router.navigate(['edit-contact',id])
+  }
+
+  onDeleteCantact(c:Contact){
+  this.contactsService.deleteContact(c.id)
+    .subscribe(data=>{
+      this.pageContacts.content.splice(
+        this.pageContacts.content.indexOf(c),1
+      );
+
+      alert("contacte supprimé");
+      },err=>{
+        console.log(err);
+      }
+    );
   }
 }

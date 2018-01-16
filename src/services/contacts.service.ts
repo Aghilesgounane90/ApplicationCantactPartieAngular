@@ -22,7 +22,11 @@ export class ContactsService{
   }
 
   saveContact(contact:Contact){
-    return this.http.post("http://127.0.0.1:8080/contacts",contact)
+    return this.http.post("http://127.0.0.1:8080/contact",contact)
+      .map(resp=>resp.json())
+  }
+  deleteContact(id:number){
+    return this.http.delete("http://127.0.0.1:8080/contact/"+id)
       .map(resp=>resp.json())
   }
 }
